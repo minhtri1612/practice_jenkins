@@ -1,0 +1,16 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk21
+    container_name: jenkins
+    user: root                # để dùng được docker.sock (chỉ nên dùng khi học/lab)
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:
